@@ -1,7 +1,7 @@
 
-# NovelReader
+# ScriptedScrollReader
 
-NovelReaderは、ブラウザで動作する縦書きと横書きをサポートする電子書籍ビューアです。特にSafariブラウザで最適化されています。
+ScriptedScrollReaderは、ブラウザで動作する縦書きと横書きをサポートする電子書籍ビューアです。特にSafariブラウザで最適化されています。
 ![Sample](https://github.com/tanuu5/NovelReader/assets/134081795/55c1fe98-2a5b-4aaa-8d8e-83cd9c78cefd)
 
 ## 概要
