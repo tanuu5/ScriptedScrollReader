@@ -135,6 +135,58 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('lightYellowThemeButton').addEventListener('click', () => {
         document.body.className = 'light-yellow-theme'; // 薄黄色の背景テーマを適用
     });
+    
+    // フォント切り替えボタン
+    const fontChangeButton = document.getElementById('fontChangeButton');
+    fontChangeButton.addEventListener('click', () => {
+        // フォント切り替え処理
+        changeFont();
+    });
 });
 
+// フォント切り替え処理
+function changeFont() {
+    const content = document.getElementById('content');
+    if (content.classList.contains('font1')) {
+        content.classList.remove('font1');
+        content.classList.add('font2');
+    } else if (content.classList.contains('font2')) {
+        content.classList.remove('font2');
+        content.classList.add('font3');
+    } else if (content.classList.contains('font3')) {
+        content.classList.remove('font3');
+        content.classList.add('font4');
+    } else {
+        content.classList.remove('font4');
+        content.classList.add('font1');
+    }
+
+    // 現在のフォント名を取得して通知
+    const currentFontName = getCurrentFontName();
+    showFontChangeNotification(`フォントが ${currentFontName} に変更されました`);
+}
+
+function getCurrentFontName() {
+    const content = document.getElementById('content');
+    if (content.classList.contains('font1')) {
+        return 'Noto Sans JP';  // または 'font1' の実際のフォント名
+    } else if (content.classList.contains('font2')) {
+        return 'Sawarabi Mincho';  // または 'font2' の実際のフォント名
+    } else if (content.classList.contains('font3')) {
+        return 'Kosugi Maru';  // または 'font3' の実際のフォント名
+    } else {
+        return 'デフォルトのフォント';  // デフォルトのフォント名
+    }
+}
+
+function showFontChangeNotification(message) {
+    const notification = document.getElementById('fontChangeNotification');
+    notification.textContent = message;
+    notification.style.display = 'block';
+
+    // 数秒後に通知を非表示にする
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 3000); // 3000ミリ秒後に非表示
+}
 

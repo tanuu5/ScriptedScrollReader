@@ -1,3 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+
+.font1 {
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.font2 {
+    font-family: 'Sawarabi Mincho', sans-serif;
+}
+
+.font3 {
+    font-family: 'Kosugi Maru', sans-serif;
+}
+
+.font4 {
+    font-family: '游ゴシック', 'Noto Sans Japanese', sans-serif;
+}
 
 body {
     font-family: '游ゴシック', 'Noto Sans Japanese', sans-serif;
@@ -187,4 +206,16 @@ body {
     color: #333;
 }
 
-/* その他のテーマ固有のスタイル */
+/* フォント変更ポップアップ */
+.font-change-notification {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
