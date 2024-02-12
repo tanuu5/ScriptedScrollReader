@@ -4,6 +4,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleWritingModeBtn = document.getElementById('toggleWritingMode');
     const saveBookmarkBtn = document.getElementById('saveBookmark');
 
+    fetch('content.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('content').innerHTML = html;
+                })
+                .catch(error => console.error('読み込みエラー:', error));
+
     // 縦書きと横書きの切り替えと設定の保存
     toggleWritingModeBtn.addEventListener('click', () => {
         content.classList.toggle('vertical');
