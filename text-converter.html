@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テキスト変換ツール - ScriptedScrollReader</title>
+    <link rel="stylesheet" href="converter-styles.css">
+    <!-- 日本語形態素解析ライブラリ (kuromoji.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/kuromoji@0.1.2/build/kuromoji.js"></script>
+</head>
+<body>
+    <header>
+        <h1>ScriptedScrollReader コンテンツ変換ツール</h1>
+    </header>
+
+    <div class="container">
+        <div class="instructions">
+            <h2>使い方</h2>
+            <ol>
+                <li>プレーンテキストを左側のエリアに入力または貼り付けます。</li>
+                <li>章見出しのフォーマットは「第X章：タイトル」または「X章：タイトル」の形式を推奨します。</li>
+                <li>「変換」ボタンをクリックするとHTMLに変換され、右側にプレビューが表示されます。</li>
+                <li>変換したHTMLをダウンロードするには「HTMLをダウンロード」をクリックします。</li>
+            </ol>
+            <div class="settings">
+                <h3>設定</h3>
+                <div class="setting-group">
+                    <label for="title">作品タイトル:</label>
+                    <input type="text" id="title" placeholder="タイトルを入力">
+                </div>
+                <div class="setting-group">
+                    <label for="auto-furigana">ふりがな自動生成:</label>
+                    <input type="checkbox" id="auto-furigana" checked>
+                </div>
+                <div class="setting-group">
+                    <label for="chapter-pattern">章パターン:</label>
+                    <input type="text" id="chapter-pattern" value="第(\d+)章[:：](.+)" placeholder="正規表現">
+                </div>
+                <div class="setting-group">
+                    <button id="advanced-settings-btn">詳細設定</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-area">
+            <div class="input-section">
+                <h2>テキスト入力</h2>
+                <textarea id="input-text" placeholder="ここにテキストを入力または貼り付けてください..."></textarea>
+                <div class="button-group">
+                    <button id="convert-btn" class="primary-btn">変換</button>
+                    <button id="load-sample-btn">サンプルを読み込む</button>
+                    <button id="clear-btn">クリア</button>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <h2>HTMLプレビュー</h2>
+                <div id="preview-area"></div>
+                <div class="button-group">
+                    <button id="download-btn" class="primary-btn">HTMLをダウンロード</button>
+                    <button id="copy-btn">HTMLをコピー</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 詳細設定モーダル -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>詳細設定</h2>
+            
+            <div class="setting-group">
+                <label for="custom-dict">カスタム辞書(JSON):</label>
+                <textarea id="custom-dict" placeholder='{"漢字": "ふりがな", "海": "うみ", ...}'></textarea>
+                <small>カスタムの漢字とふりがなのマッピングをJSON形式で入力できます。</small>
+            </div>
+            
+            <div class="setting-group">
+                <label for="exclude-patterns">ふりがなを付けない語句(正規表現):</label>
+                <input type="text" id="exclude-patterns" placeholder="(名前|固有名詞)">
+                <small>特定のパターンにマッチする語句にはふりがなを付けません。</small>
+            </div>
+            
+            <div class="setting-group">
+                <label for="paragraph-separator">段落の区切り:</label>
+                <select id="paragraph-separator">
+                    <option value="empty-line">空行</option>
+                    <option value="indent">行頭の空白</option>
+                    <option value="both" selected>両方</option>
+                </select>
+            </div>
+            
+            <div class="button-group">
+                <button id="save-settings" class="primary-btn">設定を保存</button>
+                <button id="reset-settings">デフォルトに戻す</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 保存成功メッセージ -->
+    <div id="success-message" class="message">HTMLが正常に変換されました</div>
+
+    <footer>
+        <p>&copy; 2025 ScriptedScrollReader. <a href="index.html">ビューアに戻る</a></p>
+    </footer>
+
+    <script src="converter-script.js"></script>
+</body>
+</html>

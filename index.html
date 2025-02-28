@@ -1,60 +1,100 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ふりがなと縦横書き切り替え機能付きテキストビューア（仮）</title>
+    <meta name="description" content="縦書きと横書きをサポートする日本語電子書籍ビューア">
+    <meta name="theme-color" content="#f2f2f2">
+    <title>ScriptedScrollReader - 縦書き・横書き対応電子書籍ビューア</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
 <body>
+    <!-- アクセシビリティ用スキップリンク -->
+    <a href="#content" class="sr-only">メインコンテンツにスキップ</a>
+
     <!-- 情報表示のオーバーレイ -->
-    <div id="infoOverlay" class="info-overlay" style="display: none;">
+    <div id="infoOverlay" class="info-overlay" style="display: none;" aria-modal="true" role="dialog" aria-labelledby="infoTitle">
         <div class="info-content">
-            <h3>Scripted Scroll Reader</h3>
-            <p>バージョン: 0.0.2</p>
-            <p>&copy; 2024 たぬ</p>
-            <p><a href="https://github.com/tanuu5/ScriptedScrollReader/">GitHubリポジトリ</a></p>
-            <p>お問い合わせ：<a href="https://tanu-ai.blog/#Contact/">フォーム</a></p>
-            <!-- その他の情報 -->
-            <p>画面をタップして閉じる</p>
+            <h2 id="infoTitle">Scripted Scroll Reader</h2>
+            <p>バージョン: 1.0.0</p>
+            <p>&copy; 2025 たぬ</p>
+            <p><a href="https://github.com/tanuu5/ScriptedScrollReader/" target="_blank" rel="noopener noreferrer">GitHubリポジトリ</a></p>
+            <p>お問い合わせ：<a href="https://tanu-ai.blog/#Contact/" target="_blank" rel="noopener noreferrer">フォーム</a></p>
+            <p>最終更新日: 2025年2月27日</p>
+            <div class="tools-section">
+                <h3>ツール</h3>
+                <p><a href="text-converter.html">テキスト変換ツール</a> - 小説テキストをビューア用HTMLに変換</p>
+            </div>
+            <p aria-hidden="true">画面をタップして閉じる</p>
+            <button class="close-button" aria-label="閉じる">×</button>
         </div>
     </div>
+
     <!-- ヘルプメッセージのオーバーレイ -->
-    <div id="helpOverlay" class="help-overlay" style="display: none;">
+    <div id="helpOverlay" class="help-overlay" style="display: none;" aria-modal="true" role="dialog" aria-labelledby="helpTitle">
         <div class="help-content">
-            <p><strong>Tips：</strong>表示されていないボタンがある場合、スワイプすることで表示されます。</p>
-            <p><strong>縦/横：</strong>表示を縦書き横書きに変えます。状態は端末のローカルストレージに保存されます。</p>
-            <p><strong>しおり：</strong>現在の表示位置を記録し、再度開いた際に続きから読めるようにします。状態は端末のローカルストレージに保存されます。</p>
-            <p><strong>行間大・中・小：</strong>行間の大きさを調整できます。</p>
-            <p><strong>フォント変更：</strong>現在4種類のフォントを選べます。（Noto Sans JP、Sawarabi Mincho、Kosugi Maru、游ゴシック）</p>
-            <p>画面をタップして閉じる</p>
+            <h2 id="helpTitle">使い方ガイド</h2>
+            
+            <h3>表示操作</h3>
+            <p><strong>縦/横：</strong>表示を縦書きまたは横書きに切り替えます。設定は端末に保存されます。</p>
+            <p><strong>しおり：</strong>現在の表示位置を記録します。アプリを再度開くと続きから読めます。</p>
+            
+            <h3>テキスト設定</h3>
+            <p><strong>行間調整：</strong>「行間大」「行間中」「行間小」ボタンで文字間隔を調整できます。</p>
+            <p><strong>フォント変更：</strong>4種類のフォントから選べます（Noto Sans JP、Sawarabi Mincho、Kosugi Maru、游ゴシック）。</p>
+            
+            <h3>テーマ設定</h3>
+            <p><strong>標準テーマ：</strong>通常の表示スタイル</p>
+            <p><strong>ダークテーマ：</strong>目に優しい暗色表示</p>
+            <p><strong>薄黄色の背景：</strong>紙のような読書体験</p>
+            
+            <h3>ショートカット</h3>
+            <p><strong>Ctrl+T：</strong>縦書き/横書き切り替え</p>
+            <p><strong>Ctrl+B：</strong>しおり保存</p>
+            <p><strong>Ctrl+F：</strong>フォント変更</p>
+            
+            <h3>モバイル操作</h3>
+            <p><strong>左右スワイプ：</strong>章の移動</p>
+            <p><strong>Tips：</strong>表示されていないボタンがある場合、ツールバーを左右にスワイプすることで表示されます。</p>
+            
+            <h3>コンテンツ作成</h3>
+            <p><strong>テキスト変換ツール：</strong>「テキスト変換」ボタンをクリックすると、プレーンテキストをビューア用HTMLに変換するツールが開きます。</p>
+            
+            <p aria-hidden="true">画面をタップして閉じる</p>
+            <button class="close-button" aria-label="閉じる">×</button>
         </div>
     </div>
 
-    <div id="bookmarkMessage" class="bookmark-message" style="display: none;">
-        しおりを挟みました。
-    </div>
-    <div class="toolbar">
+    <!-- メッセージ通知エリア -->
+    <div id="bookmarkMessage" class="bookmark-message" style="display: none;" aria-live="polite"></div>
+
+    <!-- ツールバー -->
+    <nav class="toolbar" role="navigation" aria-label="読書設定">
         <div class="toolbar-container">
-            <button id="helpButton">ヘルプ</button>
-            <button id="toggleWritingMode">縦/横書き</button>
-            <button id="saveBookmark">しおり🔖</button>
-            <button id="largeLineHeight">行間大</button>
-            <button id="mediumLineHeight">行間中</button>
-            <button id="smallLineHeight">行間小</button>
-            <button id="fontChangeButton">フォント変更</button>
-            <button id="defaultThemeButton">標準テーマ</button>
-            <button id="darkThemeButton">ダークテーマ</button>
-            <button id="lightYellowThemeButton">薄黄色の背景</button>
-            <button id="infoButton">情報</button>
+            <button id="helpButton" aria-label="ヘルプを表示">ヘルプ</button>
+            <button id="toggleWritingMode" aria-label="縦書きと横書きを切り替える">縦/横書き</button>
+            <button id="saveBookmark" aria-label="現在の場所にしおりを挟む">しおり🔖</button>
+            <button id="largeLineHeight" aria-label="行間を大きくする">行間大</button>
+            <button id="mediumLineHeight" aria-label="行間を標準にする">行間中</button>
+            <button id="smallLineHeight" aria-label="行間を小さくする">行間小</button>
+            <button id="fontChangeButton" aria-label="フォントを変更する">フォント変更</button>
+            <button id="defaultThemeButton" aria-label="標準テーマに変更">標準テーマ</button>
+            <button id="darkThemeButton" aria-label="ダークテーマに変更">ダークテーマ</button>
+            <button id="lightYellowThemeButton" aria-label="薄黄色の背景に変更">薄黄色の背景</button>
+            <button id="converterButton" aria-label="テキスト変換ツールを開く">テキスト変換</button>
+            <button id="infoButton" aria-label="アプリ情報を表示">情報</button>
         </div>
-    </div>
-    <!-- コンテンツを読み込み -->
-    <div id="content" class="content"></div>
-    <!-- 通知用の要素を追加 -->
-    <div id="fontChangeNotification" class="font-change-notification"></div>
+    </nav>
 
+    <!-- メインコンテンツエリア -->
+    <main id="content" class="content" tabindex="-1"></main>
+
+    <!-- フォント変更通知 -->
+    <div id="fontChangeNotification" class="font-change-notification" aria-live="polite"></div>
+
+    <!-- JavaScript読み込み -->
     <script src="script.js"></script>
 </body>
 </html>

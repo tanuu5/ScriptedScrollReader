@@ -1,0 +1,304 @@
+/* Google Fonts読み込み */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #4a86e8;
+    --secondary-color: #6aa84f;
+    --accent-color: #f9cb9c;
+    --dark-bg: #f2f2f2;
+    --light-bg: #ffffff;
+    --text-color: #333333;
+    --border-color: #cccccc;
+    --success-color: #6aa84f;
+    --warning-color: #e69138;
+    --error-color: #cc0000;
+    --border-radius: 5px;
+    --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--dark-bg);
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.instructions {
+    background-color: var(--light-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.instructions h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.instructions ol {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+.instructions li {
+    margin-bottom: 10px;
+}
+
+.settings {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: var(--border-radius);
+    margin-top: 20px;
+}
+
+.settings h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.setting-group {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.setting-group label {
+    display: inline-block;
+    width: 150px;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.setting-group input[type="text"] {
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    min-width: 300px;
+}
+
+.editor-area {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.input-section, .preview-section {
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--light-bg);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    height: fit-content;
+}
+
+.input-section h2, .preview-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+#input-text {
+    width: 100%;
+    min-height: 500px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    resize: vertical;
+}
+
+#preview-area {
+    width: 100%;
+    min-height: 500px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: #fafafa;
+    overflow-y: auto;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: #e0e0e0;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#load-sample-btn {
+    background-color: var(--accent-color);
+}
+
+#clear-btn, #reset-settings {
+    background-color: #f0f0f0;
+}
+
+#copy-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* モーダルスタイル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+#custom-dict {
+    width: 100%;
+    height: 120px;
+    font-family: monospace;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.setting-group small {
+    display: block;
+    color: #666;
+    margin-top: 5px;
+    font-size: 0.85em;
+}
+
+/* 成功メッセージ */
+.message {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    background-color: var(--success-color);
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    color: #666;
+}
+
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .editor-area {
+        flex-direction: column;
+    }
+    
+    .input-section, .preview-section {
+        width: 100%;
+    }
+    
+    .setting-group label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .setting-group input[type="text"] {
+        width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 15px;
+    }
+}

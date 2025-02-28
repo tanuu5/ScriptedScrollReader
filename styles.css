@@ -1,13 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
+/* Google Fonts (Webフォントの読み込み方法を最適化) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Sawarabi+Mincho&family=Kosugi+Maru&display=swap');
 
+:root {
+    /* カラーテーマ変数 */
+    --primary-bg: #f2f2f2;
+    --primary-text: #333;
+    --toolbar-bg: #ddd;
+    --button-bg: #f2f2f2;
+    --button-border: #ccc;
+    --overlay-bg: rgba(0, 0, 0, 0.5);
+    --card-bg: white;
+    --message-bg: rgb(174, 226, 153);
+    --bookmark-border: #ccc;
+    --focus-color: #007bff;
+    --secondary-color: #6aa84f;
+    
+    /* ダークテーマ変数 */
+    --dark-bg: #333;
+    --dark-text: #f2f2f2;
+    --dark-toolbar: #222;
+    --dark-button: #444;
+    --dark-button-border: #555;
+    --dark-card: #444;
+    
+    /* 黄色テーマ変数 */
+    --yellow-bg: #ffffe0;
+    --yellow-text: #333;
+    
+    /* サイズ・スペース変数 */
+    --toolbar-height: 50px;
+    --content-margin: 20px;
+    --border-radius: 5px;
+    
+    /* アニメーション */
+    --transition-speed: 0.3s;
+}
+
+/* フォント定義 */
 .font1 {
     font-family: 'Noto Sans JP', sans-serif;
 }
 
 .font2 {
-    font-family: 'Sawarabi Mincho', sans-serif;
+    font-family: 'Sawarabi Mincho', serif;
 }
 
 .font3 {
@@ -15,112 +50,123 @@
 }
 
 .font4 {
-    font-family: '游ゴシック', 'Noto Sans Japanese', sans-serif;
+    font-family: '游ゴシック', 'Yu Gothic', sans-serif;
 }
 
-body {
-    font-family: '游ゴシック', 'Noto Sans Japanese', sans-serif;
-    background-color: #f2f2f2;
-    color: #333;
+/* ベーススタイル */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    line-height: 1.5;
+}
+
+/* アクセシビリティ改善 */
+:focus {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}
+
+/* ツールバー */
 .toolbar {
-    display: block; /* フレックスボックスを解除し、ブロック要素に */
-    overflow-x: auto; /* 横方向のスクロールを可能にする */
-    white-space: nowrap; /* ボタンを縦に積み重ねないようにする */
-    align-items: center; /* 中央揃え */
-    height: 30px; /* ツールバーの高さを固定 */
-    width: 100%; /* ツールバーの幅を全幅に */
-    justify-content: center; /* ツールバー内のアイテムを中央に配置 */
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    align-items: center;
+    height: var(--toolbar-height);
+    width: 100%;
     padding: 10px;
-    position: fixed; /* ツールバーを画面上部に固定 */
-    top: 0; /* 画面の最上部から配置 */
-    left: 0; /* 画面の左端から配置 */
-    z-index: 1000; /* 他の要素の上に表示 */
-    background-color: #ddd; /* 背景色（必要に応じて変更） */
-    overflow-x: auto; /* 横方向のスクロールを可能にする */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: var(--toolbar-bg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-speed);
 }
 
 .toolbar-container {
-    display: flex; /* フレックスアイテムを一列に並べる */
-    justify-content: center; /* 中央揃え */
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
-    min-width: 100%; /* コンテナの最小幅をツールバーの幅と同じにする */
-    width: max-content; /* 必要な幅だけを取る */
-    flex-grow: 1;
+    min-width: 100%;
+    width: max-content;
+    gap: 8px;
+    padding: 0 10px;
 }
 
 .toolbar button {
-    display: inline-block; /* ボタンをインラインブロック要素に */
-    margin: 0 5px; /* 各ボタンの間に余白を追加 */
-    padding: 5px 10px; /* ボタンの内側の余白を増やす */
-    font-size: 1.0em; /* フォントサイズを大きくする */
-    cursor: pointer; /* カーソルをポインターに変更 */
-    /* ボタンのスタイルをカスタマイズ */
-    background-color: #f2f2f2;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 5px; /* 右に余白を追加 */
-    white-space: normal; /* ボタン内のテキストの折り返しを許可 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    border: 1px solid var(--button-border);
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
-/* スマートフォン表示の場合のスタイリング */
-@media (max-width: 600px) {
-    .toolbar button {
-        display: inline-block; /* ボタンをインラインブロック要素に */
-        padding: 5px 10px;
-        font-size: 0.8em;
-        margin-right: 0.5px; /* 右に余白を追加 */
-        white-space: normal; /* ボタン内のテキストの折り返しを許可 */
-    }
-    .toolbar {
-        display: block; /* フレックスボックスを解除し、ブロック要素に */
-        overflow-x: auto; /* 横スクロールを可能に */
-        white-space: nowrap; /* ボタンを縦に積み重ねないようにする */
-        align-items: center;
-        height: 30px; /* ツールバーの高さを固定 */
-        padding: 3px; /* パディングを調整 */
-        background-color: #ddd; /* 背景色 */
-    }
-    .toolbar-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 100%;
-    }
-    .content {
-        margin-top: 55px; /* ツールバーの新しい高さに応じて調整 */
-        margin-left: 10px; /* スマートフォンではより小さい余白 */
-        margin-right: 10px;
-    }
+.toolbar button:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
 }
 
-/* ツールバーの下にあるコンテンツが隠れないように調整 */
+.toolbar button:active {
+    transform: translateY(1px);
+}
+
+/* コンテンツエリア */
 .content {
-    margin-top: 55px; /* ツールバーの高さに応じて調整 */
+    margin-top: calc(var(--toolbar-height) + 10px);
+    margin-left: var(--content-margin);
+    margin-right: var(--content-margin);
+    margin-bottom: var(--content-margin);
+    padding: 15px;
+    transition: margin var(--transition-speed);
 }
 
 #content {
-    margin-top: 55px; /* ツールバーの高さに応じて調整 */
-    margin-left: 20px; /* 左の余白を設定 */
-    margin-right: 20px; /* 右の余白を設定 */
-    margin-bottom: 20px; /* 右の余白を設定 */
+    margin-top: calc(var(--toolbar-height) + 10px);
+    margin-left: var(--content-margin);
+    margin-right: var(--content-margin);
+    margin-bottom: var(--content-margin);
+    padding: 15px;
+    transition: margin var(--transition-speed);
 }
 
+/* 縦書きモード */
 .vertical {
     writing-mode: vertical-rl;
+    text-orientation: upright;
+    overflow-x: auto;
+    height: calc(100vh - var(--toolbar-height) - 30px);
 }
 
+/* 目次スタイル */
 .toc {
     margin: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding: 15px;
+    border: 1px solid var(--button-border);
+    border-radius: var(--border-radius);
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.toc h3 {
+.toc h1, .toc h3 {
     margin-top: 0;
+    margin-bottom: 15px;
 }
 
 .toc ul {
@@ -129,93 +175,280 @@ body {
 }
 
 .toc ul li {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
+.toc a {
+    color: #0066cc;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.toc a:hover {
+    color: #004080;
+    text-decoration: underline;
+}
+
+/* メッセージ通知 */
 .bookmark-message {
-    position: fixed; /* 画面の中央に表示 */
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 10px;
-    background-color: rgb(174, 226, 153); /* 背景色 */
-    border: 1px solid #ccc; /* 枠線 */
-    z-index: 2000; /* 他の要素より上に表示 */
-    font-size: 0.8em;
-    white-space: pre-wrap; /* 改行と空白を保持する */
-}
-
-.help-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景 */
-    z-index: 2000; /* 他の要素より上に表示 */
-}
-
-.help-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: left;
-    width: 80%; /* 幅を大きくする */
-    max-width: 600px; /* 最大幅を設定 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* オーバーレイに影をつける */
-}
-
-.info-overlay {
-    /* ヘルプオーバーレイと同様のスタイル */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    padding: 12px 20px;
+    background-color: var(--message-bg);
+    border: 1px solid var(--bookmark-border);
+    border-radius: var(--border-radius);
     z-index: 2000;
+    font-size: 1rem;
+    white-space: pre-wrap;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity var(--transition-speed);
 }
 
-.info-content {
+.bookmark-message.show {
+    opacity: 1;
+}
+
+/* オーバーレイ共通スタイル */
+.help-overlay, .info-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-bg);
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+}
+
+.help-overlay.fade-in, .info-overlay.fade-in {
+    opacity: 1;
+}
+
+.help-overlay.fade-out, .info-overlay.fade-out {
+    opacity: 0;
+}
+
+.help-content, .info-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
     text-align: left;
-    width: 80%;
+    width: 90%;
     max-width: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    max-height: 80vh;
 }
 
-/* ダークテーマ */
-.dark-theme {
-    background-color: #333;
-    color: #fff;
+.help-content p, .info-content p {
+    margin-bottom: 12px;
 }
 
-/* 薄黄色の背景テーマ */
-.light-yellow-theme {
-    background-color: #ffffe0;
-    color: #333;
+.help-content a, .info-content a {
+    color: #0066cc;
+    text-decoration: none;
 }
 
-/* フォント変更ポップアップ */
+.help-content a:hover, .info-content a:hover {
+    text-decoration: underline;
+}
+
+/* 閉じるボタン */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--primary-text);
+    transition: background-color 0.2s;
+}
+
+.close-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* フォント変更通知 */
 .font-change-notification {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    background-color: var(--card-bg);
+    padding: 12px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
     z-index: 1000;
+    transition: opacity var(--transition-speed);
+}
+
+/* テーマ設定 */
+.dark-theme {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+.dark-theme .toolbar {
+    background-color: var(--dark-toolbar);
+}
+
+.dark-theme .toolbar button {
+    background-color: var(--dark-button);
+    border-color: var(--dark-button-border);
+    color: var(--dark-text);
+}
+
+.dark-theme .toc, 
+.dark-theme .help-content, 
+.dark-theme .info-content, 
+.dark-theme .font-change-notification {
+    background-color: var(--dark-card);
+    color: var(--dark-text);
+    border-color: var(--dark-button-border);
+}
+
+.dark-theme .toc a {
+    color: #66b0ff;
+}
+
+.dark-theme .toc a:hover {
+    color: #99ccff;
+}
+
+.light-yellow-theme {
+    background-color: var(--yellow-bg);
+    color: var(--yellow-text);
+}
+
+/* 情報オーバーレイのツールセクション */
+.tools-section {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.tools-section h3 {
+    color: var(--primary-text);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.tools-section a {
+    color: var(--primary-color, #0066cc);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.tools-section a:hover {
+    text-decoration: underline;
+    color: var(--focus-color, #004080);
+}
+
+/* テキスト変換ボタンをハイライト */
+#converterButton {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* ダークテーマでのツールセクション */
+.dark-theme .tools-section h3 {
+    color: var(--dark-text);
+}
+
+.dark-theme .tools-section a {
+    color: #66b0ff;
+}
+
+.dark-theme .tools-section a:hover {
+    color: #99ccff;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    :root {
+        --toolbar-height: 40px;
+        --content-margin: 10px;
+    }
+    
+    .toolbar button {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .help-content, .info-content {
+        width: 95%;
+        padding: 15px;
+    }
+}
+
+/* スマートフォン表示 */
+@media (max-width: 480px) {
+    .toolbar {
+        padding: 5px;
+    }
+    
+    .toolbar button {
+        padding: 5px 8px;
+        font-size: 0.75rem;
+        margin-right: 3px;
+    }
+    
+    .toc h1 {
+        font-size: 1.5rem;
+    }
+    
+    .toc h3 {
+        font-size: 1.2rem;
+    }
+    
+    #content, .content {
+        margin-left: 5px;
+        margin-right: 5px;
+        padding: 10px;
+    }
+    
+    .vertical {
+        height: calc(100vh - var(--toolbar-height) - 20px);
+    }
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* アクセシビリティ改善 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
