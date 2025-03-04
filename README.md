@@ -18,7 +18,7 @@ ScriptedScrollReaderは、ブラウザで動作する縦書きと横書きをサ
 
 ## デモ
 
-デモは[こちら](https://your-demo-url.com)で試すことができます。（※実際のURLに更新してください）
+デモは[こちら](https://tanuu5.github.io/ScriptedScrollReader/)で試すことができます。
 
 ## セットアップ
 
